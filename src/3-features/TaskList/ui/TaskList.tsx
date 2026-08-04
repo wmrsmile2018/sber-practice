@@ -10,62 +10,59 @@ type TaskListProps = {
   onDeleteTask?: (id: string) => void;
 };
 
-export const TaskList: FC<TaskListProps> = memo(
-  ({ tasks, onClickTask, onDeleteTask }) => {
-    const [filter, setFilter] = useState({ priority: 'all', status: 'all' });
+export const TaskList: FC<TaskListProps> = ({
+  tasks,
+  onClickTask,
+  onDeleteTask,
+}) => {
+  const [filter, setFilter] = useState({ priority: 'all', status: 'all' });
 
-    const filteredTasks = useMemo(() => {
-      const res =
-        filter.priority === 'all'
-          ? tasks
-          : tasks.filter((task) => task.priority === filter.priority);
+  const res =
+    filter.priority === 'all'
+      ? tasks
+      : tasks.filter((task) => task.priority === filter.priority);
+  const filteredTasks =
+    filter.status === 'all'
+      ? res
+      : filter.status === 'completed'
+        ? res.filter((task) => task.completed)
+        : res.filter((task) => !task.completed);
 
-      return filter.status === 'all'
-        ? res
-        : filter.status === 'completed'
-          ? res.filter((task) => task.completed)
-          : res.filter((task) => !task.completed);
-    }, [filter, tasks]);
+  const onChangePriority = (priority: string) => {
+    setFilter((prev) => ({ ...prev, priority }));
+  };
 
-    const onChangePriority = useCallback((priority: string) => {
-      setFilter((prev) => ({ ...prev, priority }));
-    }, []);
+  const onChangeStatus = (status: string) => {
+    setFilter((prev) => ({ ...prev, status }));
+  };
 
-    const onChangeStatus = useCallback((status: string) => {
-      setFilter((prev) => ({ ...prev, status }));
-    }, []);
+  const handleChangeTaskStatus = (id: string, status: boolean) => {
+    onClickTask?.(id, status);
+  };
 
-    const handleChangeTaskStatus = useCallback(
-      (id: string, status: boolean) => {
-        onClickTask?.(id, status);
-      },
-      [onClickTask]
-    );
-
-    return (
-      <div className={styles.container}>
-        <div className={styles.filters}>
-          <FilterButton
-            options={PRIORITY}
-            defaultSelected='all'
-            onChange={onChangePriority}
-          />
-          <FilterButton
-            options={STATUS}
-            defaultSelected='all'
-            onChange={onChangeStatus}
-          />
-        </div>
-        {filteredTasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            onClick={handleChangeTaskStatus}
-            onDelete={onDeleteTask}
-            status={task.completed}
-          />
-        ))}
+  return (
+    <div className={styles.container}>
+      <div className={styles.filters}>
+        <FilterButton
+          options={PRIORITY}
+          defaultSelected='all'
+          onChange={onChangePriority}
+        />
+        <FilterButton
+          options={STATUS}
+          defaultSelected='all'
+          onChange={onChangeStatus}
+        />
       </div>
-    );
-  }
-);
+      {filteredTasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          task={task}
+          onClick={handleChangeTaskStatus}
+          onDelete={onDeleteTask}
+          status={task.completed}
+        />
+      ))}
+    </div>
+  );
+};

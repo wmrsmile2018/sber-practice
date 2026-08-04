@@ -3,7 +3,7 @@ import { TaskList, useTasks } from 'features/TaskList';
 import { memo } from 'react';
 import styles from './TaskWidget.module.css';
 
-export const TaskWidget = memo(() => {
+export const TaskWidget = () => {
   const {
     tasks: workTasks,
     removeTask: removeWorkTasks,
@@ -48,4 +48,4 @@ export const TaskWidget = memo(() => {
       </div>
     </div>
   );
-});
+};

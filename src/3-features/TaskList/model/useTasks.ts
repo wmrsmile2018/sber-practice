@@ -14,23 +14,23 @@ export const useTasks: UseTasks = (initial) => {
   const [filter, setFilter] = useState<Filter>('all');
   const [tasks, setTasks] = useState<TTask[]>(initial);
 
-  const updateFilter = useCallback((f: Filter) => {
+  const updateFilter = (f: Filter) => {
     setFilter(f);
-  }, []);
+  };
 
-  const removeTask = useCallback((id: string) => {
+  const removeTask = (id: string) => {
     setTasks((prev) => {
       return prev.filter((task) => task.id !== id);
     });
-  }, []);
+  };
 
-  const updateStatus = useCallback((id: string, status: boolean) => {
+  const updateStatus = (id: string, status: boolean) => {
     setTasks((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, completed: status } : item
       )
     );
-  }, []);
+  };
 
   return {
     tasks,
