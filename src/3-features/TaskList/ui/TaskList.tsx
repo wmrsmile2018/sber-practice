@@ -23,8 +23,8 @@ export const TaskList: FC<TaskListProps> = memo(
       return filter.status === 'all'
         ? res
         : filter.status === 'completed'
-          ? tasks.filter((task) => task.completed)
-          : tasks.filter((task) => !task.completed);
+          ? res.filter((task) => task.completed)
+          : res.filter((task) => !task.completed);
     }, [filter, tasks]);
 
     const onChangePriority = useCallback((priority: string) => {
