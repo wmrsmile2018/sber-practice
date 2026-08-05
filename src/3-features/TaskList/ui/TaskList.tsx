@@ -1,40 +1,19 @@
 import { TaskCard, type TTask } from 'entities/task';
-import { memo, useCallback, useMemo, useState, type FC } from 'react';
+import { memo, useCallback, type FC } from 'react';
 import styles from './TaskList.module.css';
 import { FilterButton } from 'shared/ui-kit';
-import { PRIORITY, STATUS } from '../model/types';
+import { PRIORITY, STATUS, type Filter, type Priority } from '../model/types';
 
 type TaskListProps = {
   tasks: TTask[];
   onClickTask?: (id: string, status: boolean) => void;
   onDeleteTask?: (id: string) => void;
+  onChangePriority: (value: Priority) => void;
+  onChangeStatus: (value: Filter) => void;
 };
 
 export const TaskList: FC<TaskListProps> = memo(
-  ({ tasks, onClickTask, onDeleteTask }) => {
-    const [filter, setFilter] = useState({ priority: 'all', status: 'all' });
-
-    const filteredTasks = useMemo(() => {
-      const res =
-        filter.priority === 'all'
-          ? tasks
-          : tasks.filter((task) => task.priority === filter.priority);
-
-      return filter.status === 'all'
-        ? res
-        : filter.status === 'completed'
-          ? res.filter((task) => task.completed)
-          : res.filter((task) => !task.completed);
-    }, [filter, tasks]);
-
-    const onChangePriority = useCallback((priority: string) => {
-      setFilter((prev) => ({ ...prev, priority }));
-    }, []);
-
-    const onChangeStatus = useCallback((status: string) => {
-      setFilter((prev) => ({ ...prev, status }));
-    }, []);
-
+  ({ tasks, onClickTask, onDeleteTask, onChangePriority, onChangeStatus }) => {
     const handleChangeTaskStatus = useCallback(
       (id: string, status: boolean) => {
         onClickTask?.(id, status);
@@ -56,7 +35,7 @@ export const TaskList: FC<TaskListProps> = memo(
             onChange={onChangeStatus}
           />
         </div>
-        {filteredTasks.map((task) => (
+        {tasks.map((task) => (
           <TaskCard
             key={task.id}
             task={task}

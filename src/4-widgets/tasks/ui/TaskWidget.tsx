@@ -8,16 +8,22 @@ export const TaskWidget = memo(() => {
     tasks: workTasks,
     removeTask: removeWorkTasks,
     updateStatus: updatedWorkStatusTask,
+    setFilter: setWorkFilter,
+    setPriority: setWorkPriority,
   } = useTasks(WORK_TASKS);
   const {
     tasks: homeTasks,
     removeTask: removeHomeTasks,
     updateStatus: updateHomeStatusTask,
+    setFilter: setHomeFilter,
+    setPriority: setHomePriority,
   } = useTasks(HOME_TASKS);
   const {
     tasks: personalTasks,
     removeTask: removePersonalTask,
     updateStatus: updatePersonalStatusTask,
+    setFilter: setPersonalFilter,
+    setPriority: setPersonalPriority,
   } = useTasks(PERSONAL_TASKS);
 
   return (
@@ -28,6 +34,8 @@ export const TaskWidget = memo(() => {
           tasks={workTasks}
           onDeleteTask={removeWorkTasks}
           onClickTask={updatedWorkStatusTask}
+          onChangePriority={setWorkPriority}
+          onChangeStatus={setWorkFilter}
         />
       </div>
       <div>
@@ -36,6 +44,8 @@ export const TaskWidget = memo(() => {
           tasks={homeTasks}
           onDeleteTask={removeHomeTasks}
           onClickTask={updateHomeStatusTask}
+          onChangeStatus={setHomeFilter}
+          onChangePriority={setHomePriority}
         />
       </div>
       <div>
@@ -44,6 +54,8 @@ export const TaskWidget = memo(() => {
           tasks={personalTasks}
           onDeleteTask={removePersonalTask}
           onClickTask={updatePersonalStatusTask}
+          onChangeStatus={setPersonalFilter}
+          onChangePriority={setPersonalPriority}
         />
       </div>
     </div>
