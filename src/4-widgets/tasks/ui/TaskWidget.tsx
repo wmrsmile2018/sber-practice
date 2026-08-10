@@ -1,4 +1,3 @@
-import { HOME_TASKS, PERSONAL_TASKS, WORK_TASKS } from 'entities/task';
 import { TaskList, useTasks } from 'features/TaskList';
 import { memo } from 'react';
 import styles from './TaskWidget.module.css';
@@ -10,21 +9,21 @@ export const TaskWidget = memo(() => {
     updateStatus: updatedWorkStatusTask,
     setFilter: setWorkFilter,
     setPriority: setWorkPriority,
-  } = useTasks(WORK_TASKS);
+  } = useTasks();
   const {
     tasks: homeTasks,
     removeTask: removeHomeTasks,
     updateStatus: updateHomeStatusTask,
     setFilter: setHomeFilter,
     setPriority: setHomePriority,
-  } = useTasks(HOME_TASKS);
+  } = useTasks();
   const {
     tasks: personalTasks,
     removeTask: removePersonalTask,
     updateStatus: updatePersonalStatusTask,
     setFilter: setPersonalFilter,
     setPriority: setPersonalPriority,
-  } = useTasks(PERSONAL_TASKS);
+  } = useTasks();
 
   return (
     <div className={styles.container}>
