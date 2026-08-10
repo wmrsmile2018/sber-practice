@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100px;
+  background: rgb(221, 241, 249);
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 4px;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid black;
+  padding-top: 4px;
+  & > svg {
+    height: 16px;
+  }
+}
+
+.headerLeftSide {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.closeIcon {
+  height: 20px;
+  width: 20px;
+  &:hover {
+    color: rgb(111, 214, 255);
+  }
+}
