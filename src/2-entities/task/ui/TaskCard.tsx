@@ -23,7 +23,7 @@ export const TaskCard: FC<TaskCardProps> = memo(
       (status: boolean) => {
         onClick?.(task.id, status);
       },
-      [task, onClick]
+      [task, onClick],
     );
 
     return (
@@ -46,12 +46,14 @@ export const TaskCard: FC<TaskCardProps> = memo(
           )}
         </div>
         <div className={styles.content}>{task.title}</div>
-        <div className={styles.footer}>
-          {task.priority === 'low' && <LowPriorityIcon />}
-          {task.priority === 'high' && <HighPriorityIcon />}
-          {task.priority === 'medium' && <MediumPriorityIcon />}
-        </div>
+        {task.priority && (
+          <div className={styles.footer}>
+            {task.priority === 'low' && <LowPriorityIcon />}
+            {task.priority === 'high' && <HighPriorityIcon />}
+            {task.priority === 'medium' && <MediumPriorityIcon />}
+          </div>
+        )}
       </div>
     );
-  }
+  },
 );

@@ -73,6 +73,7 @@ export default [
       'no-unused-vars': 'off',
       'jsx-a11y/no-static-element-interactions': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
+      'react-hooks/set-state-in-effect': 'off',
 
       'boundaries/dependencies': [
         'error',
@@ -86,6 +87,10 @@ export default [
             {
               from: 'pages',
               allow: ['widgets', 'features', 'entities', 'shared'],
+            },
+            {
+              from: 'app',
+              allow: ['shared'],
             },
           ],
         },

@@ -1,8 +1,9 @@
 import type { TTask } from 'entities/task';
 import type { Filter, Priority } from './types';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useGetTasksQuery } from 'entities/task/api';
 
-type UseTasks = (initial: TTask[]) => {
+type UseTasks = () => {
   tasks: TTask[]; // отфильтрованные задачи
   filter: Filter; // текущий фильтр
   setFilter: (f: Filter) => void; // смена фильтра
@@ -11,10 +12,18 @@ type UseTasks = (initial: TTask[]) => {
   updateStatus: (id: string, status: boolean) => void;
 };
 
-export const useTasks: UseTasks = (initial) => {
+export const useTasks: UseTasks = () => {
   const [filter, setFilter] = useState<Filter>('all');
   const [priority, setPriority] = useState<Priority>('all');
-  const [tasks, setTasks] = useState<TTask[]>(initial);
+  const [tasks, setTasks] = useState<TTask[]>([]);
+
+  const { data: serverTasks } = useGetTasksQuery();
+
+  useEffect(() => {
+    if (serverTasks) {
+      setTasks(serverTasks);
+    }
+  }, [serverTasks]);
 
   const updateFilter = useCallback((f: Filter) => {
     setFilter(f);
@@ -32,8 +41,8 @@ export const useTasks: UseTasks = (initial) => {
   const updateStatus = useCallback((id: string, status: boolean) => {
     setTasks((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, completed: status } : item
-      )
+        item.id === id ? { ...item, completed: status } : item,
+      ),
     );
   }, []);
 
