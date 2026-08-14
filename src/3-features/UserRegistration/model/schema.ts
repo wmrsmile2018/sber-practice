@@ -8,6 +8,16 @@ export const registrationSchema = z
       .min(6, 'Пароль должен быть не менее 6 символов')
       .min(1, 'Пароль обязателен'),
     confirmPassword: z.string().min(1, 'Подтверждение пароля обязательно'),
+    socialLinks: z
+      .array(
+        z.object({
+          url: z
+            .string()
+            .url('Некорректный URL')
+            .min(1, 'URL обязателен'),
+        }),
+      )
+      .optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Пароли не совпадают',

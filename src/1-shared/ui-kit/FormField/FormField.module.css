@@ -6,14 +6,13 @@
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 600;
+  font-weight: bold;
   color: #333;
   margin-bottom: 4px;
 }
 
 .error {
-  font-size: 12px;
+  font-size: 10px;
   color: #e53e3e;
   margin-top: 2px;
 }
