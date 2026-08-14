@@ -9,6 +9,7 @@
   border-radius: 4px;
   height: 34px;
   box-sizing: border-box;
+  width: 260px;
 
   &:focus {
     outline: none;
