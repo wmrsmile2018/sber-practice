@@ -1,12 +1,13 @@
 import styles from './App.module.css';
-import { TaskPage } from 'pages/tasks';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { RegistrationPage } from 'pages/users';
 function App() {
   return (
     <div className={styles.container}>
       <Provider store={store}>
-        <TaskPage />
+        <RegistrationPage />
+        {/* <TaskPage /> */}
       </Provider>
     </div>
   );

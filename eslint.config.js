@@ -6,6 +6,7 @@ import importPlugin from 'eslint-plugin-import';
 import boundaries from 'eslint-plugin-boundaries';
 import tsParser from '@typescript-eslint/parser';
 import prettier from 'eslint-config-prettier';
+import globals from 'globals';
 
 export default [
   js.configs.recommended,
@@ -24,6 +25,8 @@ export default [
       },
 
       globals: {
+        ...globals.browser,
+        ...globals.node,
         document: 'readonly',
       },
     },
