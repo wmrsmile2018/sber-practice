@@ -1,15 +1,14 @@
 import styles from './App.module.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { RegistrationPage } from 'pages/users';
-import { Form } from 'pages/wizard';
+import { ClickTimer } from 'features/refExamples';
 function App() {
   return (
     <div className={styles.container}>
       <Provider store={store}>
-        <RegistrationPage />
-        {/* <TaskPage /> */}
-        <Form />
+        <div>
+          <ClickTimer />
+        </div>
       </Provider>
     </div>
   );
