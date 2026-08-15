@@ -1,13 +1,14 @@
 import styles from './App.module.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { ClickTimer } from 'features/refExamples';
+import { ClickTimer, PreviousInput } from 'features/refExamples';
 function App() {
   return (
     <div className={styles.container}>
       <Provider store={store}>
-        <div>
+        <div style={{ display: 'flex', gap: 12, flexDirection: 'column' }}>
           <ClickTimer />
+          <PreviousInput />
         </div>
       </Provider>
     </div>

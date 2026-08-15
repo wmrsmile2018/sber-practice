@@ -31,5 +31,10 @@ export const ClickTimer: FC = () => {
     console.log('rerender');
   }, []);
 
-  return <button onClick={handleClick}>Кликни меня</button>;
+  return (
+    <div>
+      <p style={{ fontSize: '14', fontWeight: 'bold' }}>ClickTimer</p>
+      <button onClick={handleClick}>Кликни меня</button>
+    </div>
+  );
 };
