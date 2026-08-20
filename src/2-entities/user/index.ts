@@ -1,1 +1,2 @@
-export type { TUser } from './model/types';
+export type * from './model/types';
+export * from './context';

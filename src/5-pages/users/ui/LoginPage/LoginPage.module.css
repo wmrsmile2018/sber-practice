@@ -1,0 +1,47 @@
+.container {
+}
+.title {
+}
+.field {
+}
+.label {
+}
+.input {
+}
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:active {
+  background-color: #004494;
+}
+
+.linkButton {
+  padding: 10px 24px;
+  font-size: 14px;
+  color: #007bff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.linkButton:hover {
+  color: #0056b3;
+}

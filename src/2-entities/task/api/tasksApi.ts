@@ -1,4 +1,4 @@
-import { baseApi } from 'shared/api';
+import { baseApiRedux } from 'shared/api';
 import type { Todo, TTask } from 'entities/task';
 
 function transformResponse(response: Todo[]): TTask[] {
@@ -10,7 +10,7 @@ function transformResponse(response: Todo[]): TTask[] {
   }));
 }
 
-export const tasksApi = baseApi.injectEndpoints({
+export const tasksApi = baseApiRedux.injectEndpoints({
   endpoints: (build) => ({
     getTasks: build.query<TTask[], void>({
       query: () => '/todos',
