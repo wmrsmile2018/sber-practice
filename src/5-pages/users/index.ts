@@ -1,1 +1,2 @@
-export * from './ui/RegistrationPage';
+export * from './ui/LoginPage';
+export * from './ui/ProfilePage';
