@@ -1,4 +1,4 @@
-# LESSON-6 — Работа с useRef в React
+# LESSON-6 — React Router. Загрузка и комментарии
 
 Ветка: lesson-6
 

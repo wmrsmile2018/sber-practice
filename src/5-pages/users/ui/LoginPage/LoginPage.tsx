@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './LoginPage.module.css';
 import { useState, type ChangeEventHandler } from 'react';
 import { useApiContext } from 'shared/context';
 import { useAuthContext, type TAuthUserPresponse } from 'entities/user';
 import { LoginApiConfig } from 'shared/api';
+import { Button } from 'shared/ui-kit';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,15 +35,11 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Вход в систему</h1>
-
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor='email'>
-          Email
-        </label>
+    <div>
+      <h1>Вход в систему</h1>
+      <div>
+        <label htmlFor='email'>Email</label>
         <input
-          className={styles.input}
           name='email'
           placeholder='Введите email'
           value={state.email}
@@ -51,12 +47,9 @@ export const LoginPage = () => {
         />
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor='password'>
-          Пароль
-        </label>
+      <div>
+        <label htmlFor='password'>Пароль</label>
         <input
-          className={styles.input}
           type='password'
           name='password'
           placeholder='Введите пароль'
@@ -65,13 +58,13 @@ export const LoginPage = () => {
         />
       </div>
 
-      <button className={styles.button} onClick={handleSubmit}>
+      <Button variant='primary' onClick={handleSubmit}>
         Войти
-      </button>
+      </Button>
 
-      <button className={styles.button} onClick={handleClickPublic}>
+      <Button variant='secondary' onClick={handleClickPublic}>
         Публичная страница
-      </button>
+      </Button>
     </div>
   );
 };

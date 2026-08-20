@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './ProfilePage.module.css';
 import { useAuthContext } from 'entities/user';
 import { useApiContext } from 'shared/context';
+import { Button } from 'shared/ui-kit';
 
 export const ProfilePage = () => {
   const { profile } = useAuthContext();
@@ -10,25 +10,30 @@ export const ProfilePage = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login', { replace: true });
+  };
+
+  const handlePublic = () => {
+    navigate('/public');
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Профиль пользователя</h1>
-      <div className={styles.profile}>
-        <div className={styles.field}>
-          <span className={styles.label}>ID:</span>
-          <span className={styles.value}>{profile?.id}</span>
-        </div>
-        <div className={styles.field}>
-          <span className={styles.label}>Email:</span>
-          <span className={styles.value}>{profile?.email}</span>
-        </div>
+    <div>
+      <h1>Профиль пользователя</h1>
+      <div>
+        <span>ID:</span>
+        <span>{profile?.id}</span>
       </div>
-      <button className={styles.button} onClick={handleLogout}>
+      <div>
+        <span>Email:</span>
+        <span>{profile?.email}</span>
+      </div>
+      <Button variant='primary' onClick={handleLogout}>
         Выйти
-      </button>
+      </Button>
+      <Button variant='secondary' onClick={handlePublic}>
+        Публичная страница
+      </Button>
     </div>
   );
 };

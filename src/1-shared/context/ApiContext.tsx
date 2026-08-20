@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type FC,
@@ -57,7 +58,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
     localStorage.removeItem(AUTH_TOKEN_KEY);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
     if (token) {
       setAuthToken(token);
@@ -71,9 +72,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         options: {
           ...options,
           method: 'GET',
-          headers: authToken
-            ? { Authorization: `Bearer ${authToken}` }
-            : undefined,
+          headers: authToken ? { Authorization: authToken } : undefined,
         },
       });
     },
@@ -87,9 +86,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         options: {
           ...options,
           method: 'POST',
-          headers: authToken
-            ? { Authorization: `Bearer ${authToken}` }
-            : undefined,
+          headers: authToken ? { Authorization: authToken } : undefined,
         },
       });
     },

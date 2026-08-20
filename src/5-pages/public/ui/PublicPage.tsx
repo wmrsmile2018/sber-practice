@@ -1,18 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './PublicPage.module.css';
+import { Button } from 'shared/ui-kit';
 
 export const PublicPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Публичная страница</h1>
-      <p className={styles.description}>
-        Эта страница доступна всем пользователям без авторизации.
-      </p>
-      <button className={styles.authButton} onClick={() => navigate('/login')}>
+    <div>
+      <h1>Публичная страница</h1>
+      <p>Эта страница доступна всем пользователям без авторизации.</p>
+      <Button variant='primary' onClick={() => navigate('/login')}>
         Войти
-      </button>
+      </Button>
+      <Button variant='secondary' onClick={() => navigate('/profile')}>
+        Профиль
+      </Button>
     </div>
   );
 };

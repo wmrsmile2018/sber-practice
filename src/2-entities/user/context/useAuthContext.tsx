@@ -3,24 +3,47 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
   type FC,
   type PropsWithChildren,
 } from 'react';
 import type { TAuthUser } from '../model';
 import { useApiContext } from 'shared/context';
+import { myProfileApiConfig } from 'shared/api';
 
 type AuthContextType = {
   profile?: TAuthUser;
   setProfile: (profile: TAuthUser, token: string) => void;
+  isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType>({
   setProfile: () => {},
+  isLoading: false,
 });
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [profile, setProfile] = useState<TAuthUser | undefined>();
-  const { login } = useApiContext();
+  const [isLoading, setIsLoading] = useState(true);
+  const { login, getEntity, getToken } = useApiContext();
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      login(token);
+
+      getEntity(myProfileApiConfig.path)
+        .then((response) => {
+          setProfile(response as TAuthUser);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, [getEntity, getToken, login]);
+
   const contextValue = useMemo(
     () => ({
       setProfile: (profile: TAuthUser, token: string) => {
@@ -28,8 +51,9 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         login(token);
       },
       profile,
+      isLoading,
     }),
-    [profile, login],
+    [profile, isLoading, login],
   );
 
   return (
