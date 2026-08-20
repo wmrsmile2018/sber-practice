@@ -1,12 +1,16 @@
 import styles from './App.module.css';
-import { TaskPage } from 'pages/tasks';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { ClickTimer, FocusTracker, PreviousInput } from 'features/refExamples';
 function App() {
   return (
     <div className={styles.container}>
       <Provider store={store}>
-        <TaskPage />
+        <div style={{ display: 'flex', gap: 12, flexDirection: 'column' }}>
+          <ClickTimer />
+          <PreviousInput />
+          <FocusTracker />
+        </div>
       </Provider>
     </div>
   );
