@@ -1,8 +1,8 @@
-import { WithProtection } from '../../../shared/store/HOCs/WithProtection';
-import { WithQuery } from '../../../shared/store/HOCs/WithQuery';
-import { useProducts } from '../../../shared/store/hooks/useProducts';
-import { ButtonBack } from '../../../shared/ui/ButtonBack';
-import { CardList } from '../../../widgets/CardList';
+import { WithProtection } from '../../../1-shared/store/HOCs/WithProtection';
+import { WithQuery } from '../../../1-shared/store/HOCs/WithQuery';
+import { useProducts } from '../../../1-shared/store/hooks/useProducts';
+import { ButtonBack } from '../../../1-shared/ui/ButtonBack';
+import { CardList } from '../../../4-widgets/CardList';
 
 const CardListWithQuery = WithQuery(CardList);
 
