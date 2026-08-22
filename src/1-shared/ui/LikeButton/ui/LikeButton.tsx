@@ -1,5 +1,4 @@
 import s from './LikeButton.module.css';
-import LikeSvg from '../../../assets/icons/like.svg';
 import classNames from 'classnames';
 import { useAppSelector } from '../../../store/utils';
 import { userSelectors } from '../../../store/slices/user';
@@ -9,6 +8,7 @@ import {
   IErrorResponse,
 } from '../../../store/api/productsApi';
 import { toast } from 'react-toastify';
+import { LikeUIIcon } from 'shared/assets';
 
 type TLikeButtonProps = {
   product: Product;
@@ -47,7 +47,7 @@ export const LikeButton = ({ product }: TLikeButtonProps) => {
       })}
       onClick={toggleLike}
     >
-      <LikeSvg />
+      <LikeUIIcon />
     </button>
   );
 };

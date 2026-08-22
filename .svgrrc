@@ -1,0 +1,13 @@
+{
+  "typescript": true,
+  "icon": true,
+  "expandProps": "start",
+  "svgo": true,
+  "memo": false,
+  "prettier": true,
+  "ignoreExisting": true,
+  "jsxRuntime": "automatic",
+  "replaceAttrValues": {
+    "#000": "currentColor"
+  }
+}

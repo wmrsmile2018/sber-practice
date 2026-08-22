@@ -1,11 +1,13 @@
 import classNames from 'classnames';
-import Instagram from 'shared/assets/images/instagram.svg';
-import Telegram from 'shared/assets/images/telegram.svg';
-import Viber from 'shared/assets/images/viber.svg';
-import Vk from 'shared/assets/images/vk.svg';
-import Whatsapp from 'shared/assets/images/whatsapp.svg';
 import s from './Footer.module.css';
 import { Logo } from '../../../1-shared/ui/Logo';
+import {
+  InstagramUIIcon,
+  TelegramUIIcon,
+  ViberUIIcon,
+  VkUIIcon,
+  WhatsappUIIcon,
+} from 'shared/assets';
 
 export const Footer = () => {
   return (
@@ -68,27 +70,27 @@ export const Footer = () => {
               <ul className={classNames(s['socials'])}>
                 <li>
                   <a className={s['socials__link']} href='/#'>
-                    <img src={Telegram} alt='telegram' />
+                    <TelegramUIIcon />
                   </a>
                 </li>
                 <li>
                   <a className={s['socials__link']} href='/#'>
-                    <img src={Whatsapp} alt='whatsapp' />
+                    <WhatsappUIIcon />
                   </a>
                 </li>
                 <li>
                   <a className={s['socials__link']} href='/#'>
-                    <img src={Viber} alt='viber' />
+                    <ViberUIIcon />
                   </a>
                 </li>
                 <li>
                   <a className={s['socials__link']} href='/#'>
-                    <img src={Instagram} alt='instagram' />
+                    <InstagramUIIcon />
                   </a>
                 </li>
                 <li>
                   <a className={s['socials__link']} href='/#'>
-                    <img src={Vk} alt='vk' />
+                    <VkUIIcon />
                   </a>
                 </li>
               </ul>

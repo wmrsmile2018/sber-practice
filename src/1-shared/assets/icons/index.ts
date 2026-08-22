@@ -1,0 +1,11 @@
+export { default as BackUIIcon } from "./Back";
+export { default as InstagramUIIcon } from "./Instagram";
+export { default as LikeUIIcon } from "./Like";
+export { default as QualityUIIcon } from "./Quality";
+export { default as StarUIIcon } from "./Star";
+export { default as TelegramUIIcon } from "./Telegram";
+export { default as TrashUIIcon } from "./Trash";
+export { default as TruckUIIcon } from "./Truck";
+export { default as ViberUIIcon } from "./Viber";
+export { default as VkUIIcon } from "./Vk";
+export { default as WhatsappUIIcon } from "./Whatsapp";

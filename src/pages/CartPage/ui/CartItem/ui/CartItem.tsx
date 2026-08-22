@@ -1,8 +1,8 @@
-import TrashIcon from 'shared/assets/icons/trash.svg';
 import { Link } from 'react-router-dom';
 import s from '../../CartPage.module.css';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
+import { TrashUIIcon } from 'shared/assets';
 // import { cartActions } from '../../../../../shared/store/slices/cart';
 // import { CartCounter } from '../../../../../shared/ui/CartCounter';
 
@@ -51,7 +51,7 @@ export const CartItem = ({ product }: CartItemProps) => {
               </div>
             </div>
             <button className={classNames(s['cart-item__bnt-trash'])}>
-              <TrashIcon onClick={handleDelete} />
+              <TrashUIIcon onClick={handleDelete} />
             </button>
           </div>
         </div>
