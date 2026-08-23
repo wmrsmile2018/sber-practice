@@ -20,6 +20,8 @@ import { signInFormSchema } from '../utils/validator';
 import { useSignInMutation } from '../../../1-shared/store/api/authApi';
 import { userActions } from '../../../1-shared/store/slices/user';
 import { getMessageFromError } from '../../../1-shared/utils';
+import { ButtonUI } from 'shared/ui';
+import { TelegramUIIcon, ViberUIIcon } from 'shared/assets';
 
 export const SignInForm: FC = () => {
   const dispatch = useDispatch();
@@ -150,6 +152,21 @@ export const SignInForm: FC = () => {
           >
             Sign IN
           </LoadingButton>
+          <ButtonUI variant='filled' level='primary'>
+            SIGN IN
+          </ButtonUI>
+
+          <ButtonUI variant='border' level='primary'>
+            SIGN UP
+          </ButtonUI>
+
+          <ButtonUI variant='ghost' level='secondary'>
+            Каталог
+          </ButtonUI>
+
+          <ButtonUI variant='icon' level='secondary'>
+            <TelegramUIIcon />
+          </ButtonUI>
           <Box>
             <Link component={RouterLink} to='/signup'>
               SIGN UP
