@@ -17,6 +17,7 @@ export type InputUIProps = {
   dynamicLabel?: boolean;
   withBorder?: boolean;
   style?: CSSProperties;
+  name?: string;
 };
 
 export const InputUI: FC<InputUIProps> = ({
@@ -28,6 +29,7 @@ export const InputUI: FC<InputUIProps> = ({
   dynamicLabel,
   withBorder = true,
   style,
+  name,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -43,7 +45,7 @@ export const InputUI: FC<InputUIProps> = ({
 
   return (
     <div className={s.inputWrapper} style={style}>
-      {label && (
+      {label && ((!dynamicLabel && !value) || dynamicLabel) && (
         <span
           className={classNames(s.inputLabel, {
             [s['inputLabel--floating']]: isFloating,
@@ -63,6 +65,7 @@ export const InputUI: FC<InputUIProps> = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={!dynamicLabel ? placeholder || label : ''}
+        name={name}
       />
     </div>
   );
