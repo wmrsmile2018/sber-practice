@@ -1,5 +1,5 @@
-import { SignUpForm } from 'entities/user/SignUpForm';
-import { WithProtection } from '../../../1-shared/store/HOCs/WithProtection';
+import { SignUpForm } from 'entities/user/ui/SignUpForm';
+import { WithProtection } from 'shared/store/HOCs';
 
 export const SignUpPage = WithProtection(() => {
   return <SignUpForm />;
