@@ -1,0 +1,35 @@
+.anchorWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.anchorTarget {
+  display: block;
+}
+
+.anchorSrc {
+  position: absolute;
+  z-index: 1000;
+}
+
+.anchorSrc--left-top {
+  left: 0;
+  top: 0;
+  transform: translate(-100%, -100%);
+}
+
+.anchorSrc--right-top {
+  right: -15%;
+  top: -15%;
+}
+
+.anchorSrc--left-bottom {
+  left: 0;
+  bottom: 0;
+  transform: translate(-100%, 0);
+}
+
+.anchorSrc--right-bottom {
+  right: 0;
+  bottom: 0;
+}
