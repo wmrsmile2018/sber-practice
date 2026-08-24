@@ -1,9 +1,9 @@
 import s from './CartPage.module.css';
 import classNames from 'classnames';
-import { useAppSelector } from '../../../1-shared/store/utils';
-import { cartSelectors } from '../../../1-shared/store/slices/cart';
-import { CartList } from './CartList';
-import { CartAmount } from './CartAmount';
+import { useAppSelector } from 'shared/store/utils';
+import { cartSelectors } from 'shared/store/slices';
+import { CartAmount } from 'entities/cart';
+import { CartList } from 'features/CartList';
 
 export const CartPage = () => {
   const products = useAppSelector(cartSelectors.getCartProducts);

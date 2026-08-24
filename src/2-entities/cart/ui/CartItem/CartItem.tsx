@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import s from '../../CartPage.module.css';
+import s from './CartPage.module.css';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { TrashUIIcon } from 'shared/assets';
-// import { cartActions } from '../../../../../shared/store/slices/cart';
-// import { CartCounter } from '../../../../../shared/ui/CartCounter';
+import { cartActions } from 'shared/store/slices';
+import { CartCounter } from 'shared/ui/CartCounter';
 
 type CartItemProps = {
   product: CartProduct;

@@ -11,7 +11,7 @@ import { SignInFormValues, useSignInMutation } from 'shared/store/api';
 import { userActions } from 'shared/store/slices';
 import { getMessageFromError } from 'shared/utils';
 
-import { signInFormSchema } from '../utils/validator';
+import { signInFormSchema } from './validator';
 import s from './SignInForm.module.css';
 
 export const SignInForm: FC = () => {

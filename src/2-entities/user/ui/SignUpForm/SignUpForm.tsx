@@ -1,22 +1,14 @@
 import { FC } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {
-  Avatar,
-  Box,
-  Container,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignUpFormValues } from '../utils/types';
-import { signUpFormSchema } from '../utils/validator';
-import { useSignUpMutation } from 'shared/store/api';
+import { signUpFormSchema } from './validator';
+import { SignUpFormValues, useSignUpMutation } from 'shared/store/api';
 import { getMessageFromError } from 'shared/utils';
 import { userActions } from 'shared/store/slices';
 import { ButtonUI } from 'shared/ui';
