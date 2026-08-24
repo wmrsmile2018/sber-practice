@@ -7,11 +7,22 @@ import boundaries from 'eslint-plugin-boundaries';
 import tsParser from '@typescript-eslint/parser';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+import tsPlugin from 'typescript-eslint';
 
 export default [
   js.configs.recommended,
   prettier,
   { ignores: ['dist/**'] },
+  ...tsPlugin.configs.recommended,
+  // ...tsPlugin.configs.recommendedTypeChecked,
+  {
+    files: ['**/*.d.ts', 'src/**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-empty-interface': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
   {
     files: ['src/**/*.{js,jsx,ts,tsx}'],
 
@@ -93,7 +104,7 @@ export default [
             },
             {
               from: 'app',
-              allow: ['shared'],
+              allow: ['shared', 'pages'],
             },
           ],
         },

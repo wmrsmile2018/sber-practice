@@ -35,7 +35,7 @@ export const useLoadMore = ({ ref }: UseLoadMoreParams) => {
         }
       };
       observer = new IntersectionObserver(callback, options);
-      ref.current && observer.observe(ref.current);
+      if (ref.current) observer.observe(ref.current);
     }
 
     return () => {
