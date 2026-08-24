@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "shared/*": ["src/1-shared/*"],
+      "shared/*": ["./src/1-shared/*"],
       "entities/*": ["./src/2-entities/*"],
       "features/*": ["./src/3-features/*"],
       "widgets/*": ["./src/4-widgets/*"],

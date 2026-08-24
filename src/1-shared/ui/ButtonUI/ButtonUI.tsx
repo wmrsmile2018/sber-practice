@@ -2,7 +2,7 @@ import { CSSProperties, FC, PropsWithChildren } from 'react';
 import s from './Button.module.css';
 import classNames from 'classnames';
 
-type ButtonUIProps = PropsWithChildren & {
+export type ButtonUIProps = PropsWithChildren & {
   variant: 'filled' | 'icon' | 'ghost' | 'border';
   level: 'primary' | 'secondary';
   style?: CSSProperties;
