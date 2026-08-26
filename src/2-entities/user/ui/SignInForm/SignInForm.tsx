@@ -1,4 +1,11 @@
-import { FC, memo, useCallback, useEffect } from 'react';
+import {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -19,6 +26,14 @@ type SignInFormProps = {
 };
 
 export const SignInForm: FC<SignInFormProps> = memo(({ onClick }) => {
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  useLayoutEffect(() => {
+    requestAnimationFrame(() => {
+      emailRef.current?.focus();
+    });
+  }, []);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -94,6 +109,7 @@ export const SignInForm: FC<SignInFormProps> = memo(({ onClick }) => {
             control={control}
             render={({ field }) => (
               <TextField
+                inputRef={emailRef}
                 margin='normal'
                 label='Email Address'
                 type='email'

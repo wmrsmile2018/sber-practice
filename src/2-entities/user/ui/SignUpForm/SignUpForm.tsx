@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
@@ -15,6 +15,12 @@ import { ButtonUI } from 'shared/ui';
 import s from './SignUpForm.module.css';
 
 export const SignUpForm: FC = memo(() => {
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signUpRequestFn] = useSignUpMutation();
@@ -82,6 +88,7 @@ export const SignUpForm: FC = memo(() => {
             control={control}
             render={({ field }) => (
               <TextField
+                inputRef={emailRef}
                 margin='normal'
                 label='Email Address'
                 type='email'
