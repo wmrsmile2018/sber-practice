@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import s from './Card.module.css';
-import { Price } from 'shared/ui/Card/ui/Price/ui/Price';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from 'shared/store/utils';
 import { cartSelectors } from 'shared/store/slices';
@@ -8,6 +7,7 @@ import { memo } from 'react';
 import { useAddToCart } from 'entities/cart/model';
 import { LikeButton } from '../../LikeButton';
 import { CartCounter } from '../../CartCounter';
+import { Price } from 'shared/ui/Price';
 
 type CardProps = {
   product: Product;
