@@ -5,11 +5,12 @@ import { useDispatch } from 'react-redux';
 import { TrashUIIcon } from 'shared/assets';
 import { cartActions } from 'shared/store/slices';
 import { CartCounter } from 'shared/ui/CartCounter';
+import { memo } from 'react';
 
 type CartItemProps = {
   product: CartProduct;
 };
-export const CartItem = ({ product }: CartItemProps) => {
+export const CartItem = memo(({ product }: CartItemProps) => {
   const dispatch = useDispatch();
   const { id, name, images, price, discount } = product;
 
@@ -58,4 +59,4 @@ export const CartItem = ({ product }: CartItemProps) => {
       </div>
     </div>
   );
-};
+});

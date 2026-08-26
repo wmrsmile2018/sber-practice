@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -18,7 +18,7 @@ type SignInFormProps = {
   onClick: VoidFunction;
 };
 
-export const SignInForm: FC<SignInFormProps> = ({ onClick }) => {
+export const SignInForm: FC<SignInFormProps> = memo(({ onClick }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,29 +35,32 @@ export const SignInForm: FC<SignInFormProps> = ({ onClick }) => {
     resolver: yupResolver(signInFormSchema),
   });
 
-  const submitHandler: SubmitHandler<SignInFormValues> = async (values) => {
-    try {
-      const response = await signInRequestFn(values).unwrap();
+  const submitHandler: SubmitHandler<SignInFormValues> = useCallback(
+    async (values) => {
+      try {
+        const response = await signInRequestFn(values).unwrap();
 
-      dispatch(userActions.setUser(response.user));
-      dispatch(
-        userActions.setAccessToken({ accessToken: response.accessToken }),
-      );
-      toast.success('Вы успешно авторизованы!');
-      if (location.state?.from) {
-        return navigate(location.state.from);
+        dispatch(userActions.setUser(response.user));
+        dispatch(
+          userActions.setAccessToken({ accessToken: response.accessToken }),
+        );
+        toast.success('Вы успешно авторизованы!');
+        if (location.state?.from) {
+          return navigate(location.state.from);
+        }
+
+        navigate('/');
+      } catch (error) {
+        toast.error(
+          getMessageFromError(
+            error,
+            'Не известная ошибка при авторизации пользователя',
+          ),
+        );
       }
-
-      navigate('/');
-    } catch (error) {
-      toast.error(
-        getMessageFromError(
-          error,
-          'Не известная ошибка при авторизации пользователя',
-        ),
-      );
-    }
-  };
+    },
+    [dispatch, location.state.from, navigate, signInRequestFn],
+  );
 
   useEffect(() => {
     if (isSuccess) {
@@ -144,4 +147,4 @@ export const SignInForm: FC<SignInFormProps> = ({ onClick }) => {
       </Box>
     </Container>
   );
-};
+});

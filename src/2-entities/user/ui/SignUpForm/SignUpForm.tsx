@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
@@ -14,7 +14,7 @@ import { userActions } from 'shared/store/slices';
 import { ButtonUI } from 'shared/ui';
 import s from './SignUpForm.module.css';
 
-export const SignUpForm: FC = () => {
+export const SignUpForm: FC = memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signUpRequestFn] = useSignUpMutation();
@@ -30,27 +30,30 @@ export const SignUpForm: FC = () => {
     resolver: yupResolver(signUpFormSchema),
   });
 
-  const submitHandler: SubmitHandler<SignUpFormValues> = async (values) => {
-    try {
-      const response = await signUpRequestFn(values).unwrap();
+  const submitHandler: SubmitHandler<SignUpFormValues> = useCallback(
+    async (values) => {
+      try {
+        const response = await signUpRequestFn(values).unwrap();
 
-      dispatch(userActions.setUser(response.user));
-      dispatch(
-        userActions.setAccessToken({ accessToken: response.accessToken }),
-      );
+        dispatch(userActions.setUser(response.user));
+        dispatch(
+          userActions.setAccessToken({ accessToken: response.accessToken }),
+        );
 
-      toast.success('Вы успешно зарегистрированы!');
-      navigate('/');
-    } catch (error) {
-      console.log({ error });
-      toast.error(
-        getMessageFromError(
-          error,
-          'Не известная ошибка при регистрации пользователя',
-        ),
-      );
-    }
-  };
+        toast.success('Вы успешно зарегистрированы!');
+        navigate('/');
+      } catch (error) {
+        console.log({ error });
+        toast.error(
+          getMessageFromError(
+            error,
+            'Не известная ошибка при регистрации пользователя',
+          ),
+        );
+      }
+    },
+    [dispatch, navigate, signUpRequestFn],
+  );
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -133,4 +136,4 @@ export const SignUpForm: FC = () => {
       </Box>
     </Container>
   );
-};
+});

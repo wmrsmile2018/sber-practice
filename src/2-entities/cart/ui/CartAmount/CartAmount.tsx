@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import s from './CartAmount.module.css';
 import classNames from 'classnames';
 
 type CartAmountProps = {
   products: CartProduct[];
 };
-export const CartAmount = ({ products }: CartAmountProps) => {
+export const CartAmount = memo(({ products }: CartAmountProps) => {
   const allPrice = products.reduce((acc, p) => p.price * p.count + acc, 0);
   const allDiscount = products.reduce(
     (acc, p) => p.discount * p.count + acc,
@@ -62,4 +63,4 @@ export const CartAmount = ({ products }: CartAmountProps) => {
       </button>
     </div>
   );
-};
+});

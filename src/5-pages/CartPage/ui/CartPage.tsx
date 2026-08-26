@@ -4,8 +4,9 @@ import { useAppSelector } from 'shared/store/utils';
 import { cartSelectors } from 'shared/store/slices';
 import { CartAmount } from 'entities/cart';
 import { CartList } from 'features/CartList';
+import { memo } from 'react';
 
-export const CartPage = () => {
+export const CartPage = memo(() => {
   const products = useAppSelector(cartSelectors.getCartProducts);
 
   if (!products.length) {
@@ -23,4 +24,4 @@ export const CartPage = () => {
       </div>
     </div>
   );
-};
+});

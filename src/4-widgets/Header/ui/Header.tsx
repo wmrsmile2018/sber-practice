@@ -7,11 +7,11 @@ import { isLiked } from 'shared/utils';
 import { Logo } from 'shared/ui/Logo';
 import { Search } from 'shared/ui/Search/ui/Search';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { ButtonUI, ModalUI } from 'shared/ui';
 import { SignInForm } from 'entities/user/ui';
 
-export const Header = () => {
+export const Header = memo(() => {
   const { products } = useProducts();
   const user = useAppSelector(userSelectors.getUser);
   const cartProducts = useAppSelector(cartSelectors.getCartProducts);
@@ -101,4 +101,4 @@ export const Header = () => {
       </ModalUI>
     </>
   );
-};
+});
