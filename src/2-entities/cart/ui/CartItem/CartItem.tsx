@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { TrashUIIcon } from 'shared/assets';
 import { cartActions } from 'shared/store/slices';
-import { CartCounter } from 'shared/ui/CartCounter';
 import { memo } from 'react';
+import { CartCounter } from 'entities/cart';
 
 type CartItemProps = {
   product: CartProduct;

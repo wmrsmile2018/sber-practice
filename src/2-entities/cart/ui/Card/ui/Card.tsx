@@ -1,21 +1,22 @@
 import classNames from 'classnames';
 import s from './Card.module.css';
-import { Price } from './Price/ui/Price';
+import { Price } from 'shared/ui/Card/ui/Price/ui/Price';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from 'shared/store/utils';
+import { cartSelectors } from 'shared/store/slices';
+import { memo } from 'react';
+import { useAddToCart } from 'entities/cart/model';
+import { LikeButton } from '../../LikeButton';
+import { CartCounter } from '../../CartCounter';
 
 type CardProps = {
   product: Product;
-  isInCart: boolean;
-  onAddToCart: () => void;
-  onToggleLike: () => void;
 };
-export const Card = ({
-  product,
-  isInCart,
-  onAddToCart,
-  onToggleLike,
-}: CardProps) => {
+export const Card = memo(({ product }: CardProps) => {
   const { discount, price, name, tags, id, images } = product;
+  const cartProducts = useAppSelector(cartSelectors.getCartProducts);
+  const isProductInCart = cartProducts.some((p) => p.id === id);
+  const { addProductToCart } = useAddToCart();
 
   return (
     <article className={s['card']}>
@@ -39,31 +40,26 @@ export const Card = ({
           s['card__sticky_type_top-right'],
         )}
       >
-        <button
-          className={classNames(s['card__favorite'])}
-          onClick={onToggleLike}
-        >
-          <span className={s['card__favorite-icon']} />
-        </button>
+        <LikeButton product={product} />
       </div>
       <Link className={s['card__link']} to={`/products/${id}`}>
         <img
           src={images}
           alt={name}
           className={s['card__image']}
-          loading="lazy"
+          loading='lazy'
         />
         <div className={s['card__desc']}>
           <Price price={price} discountPrice={discount} />
           <h3 className={s['card__name']}>{name}</h3>
         </div>
       </Link>
-      {isInCart ? (
-        <span className={s['card__in-cart']}>В корзине</span>
+      {isProductInCart ? (
+        <CartCounter productId={id} />
       ) : (
         <button
-          onClick={onAddToCart}
-          disabled={isInCart}
+          onClick={() => addProductToCart({ ...product, count: 1 })}
+          disabled={isProductInCart}
           className={classNames(
             s['card__cart'],
             s['card__btn'],
@@ -75,4 +71,4 @@ export const Card = ({
       )}
     </article>
   );
-};
+});

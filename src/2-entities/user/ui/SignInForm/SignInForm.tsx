@@ -59,7 +59,7 @@ export const SignInForm: FC<SignInFormProps> = memo(({ onClick }) => {
         );
       }
     },
-    [dispatch, location.state.from, navigate, signInRequestFn],
+    [dispatch, location?.state?.from, navigate, signInRequestFn],
   );
 
   useEffect(() => {

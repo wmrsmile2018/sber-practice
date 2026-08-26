@@ -1,13 +1,37 @@
-import { createBrowserRouter } from 'react-router-dom';
-
-import { HomePage } from 'pages/HomePage';
-import { FavoritesPage } from 'pages/FavoritesPage';
-import { ProductPage } from 'pages/ProductPage';
-import { ProfilePage } from 'pages/ProfilePage';
-import { CartPage } from 'pages/CartPage';
-import { SignUpPage } from 'pages/SignUpPage';
-import { NotFoundPage } from 'pages/NotFoundPage';
 import { App } from 'app/App';
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import { Spinner } from 'shared/ui/Spinner';
+
+const HomePage = lazy(() =>
+  import('pages/HomePage').then((module) => ({ default: module.HomePage })),
+);
+const FavoritesPage = lazy(() =>
+  import('pages/FavoritesPage').then((module) => ({
+    default: module.FavoritesPage,
+  })),
+);
+const ProductPage = lazy(() =>
+  import('pages/ProductPage').then((module) => ({
+    default: module.ProductPage,
+  })),
+);
+const ProfilePage = lazy(() =>
+  import('pages/ProfilePage').then((module) => ({
+    default: module.ProfilePage,
+  })),
+);
+const CartPage = lazy(() =>
+  import('pages/CartPage').then((module) => ({ default: module.CartPage })),
+);
+const SignUpPage = lazy(() =>
+  import('pages/SignUpPage').then((module) => ({ default: module.SignUpPage })),
+);
+const NotFoundPage = lazy(() =>
+  import('pages/NotFoundPage').then((module) => ({
+    default: module.NotFoundPage,
+  })),
+);
 
 export enum AppRoutes {
   HOME = 'home',
@@ -38,33 +62,61 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <HomePage />
+          </Suspense>
+        ),
       },
       {
         path: RoutePath.favorites,
-        element: <FavoritesPage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FavoritesPage />
+          </Suspense>
+        ),
       },
       {
         path: RoutePath.products,
-        element: <ProductPage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ProductPage />
+          </Suspense>
+        ),
       },
       {
         path: RoutePath.profile,
-        element: <ProfilePage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ProfilePage />
+          </Suspense>
+        ),
       },
       {
         path: RoutePath.cart,
-        element: <CartPage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CartPage />
+          </Suspense>
+        ),
       },
       {
         path: RoutePath.signup,
-        element: <SignUpPage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SignUpPage />
+          </Suspense>
+        ),
       },
 
       // last route
       {
         path: RoutePath.not_found,
-        element: <NotFoundPage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <NotFoundPage />
+          </Suspense>
+        ),
       },
     ],
   },

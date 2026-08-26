@@ -104,7 +104,7 @@ export default [
             },
             {
               from: 'app',
-              allow: ['shared', 'pages'],
+              allow: ['shared', 'pages', 'widgets'],
             },
           ],
         },

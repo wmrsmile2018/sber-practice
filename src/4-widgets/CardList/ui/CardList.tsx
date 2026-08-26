@@ -1,4 +1,4 @@
-import { Card } from 'shared/ui/Card';
+import { Card } from 'entities/cart';
 import s from './CardList.module.css';
 import { memo } from 'react';
 
