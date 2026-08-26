@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { App } from '../../..';
 import { HomePage } from 'pages/HomePage';
 import { FavoritesPage } from 'pages/FavoritesPage';
 import { ProductPage } from 'pages/ProductPage';
@@ -8,6 +7,7 @@ import { ProfilePage } from 'pages/ProfilePage';
 import { CartPage } from 'pages/CartPage';
 import { SignUpPage } from 'pages/SignUpPage';
 import { NotFoundPage } from 'pages/NotFoundPage';
+import { App } from 'app/App';
 
 export enum AppRoutes {
   HOME = 'home',

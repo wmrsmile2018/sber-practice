@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import s from './CartPage.module.css';
+import s from './CartItem.module.css';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { TrashUIIcon } from 'shared/assets';

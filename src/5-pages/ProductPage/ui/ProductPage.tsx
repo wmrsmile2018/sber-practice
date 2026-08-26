@@ -11,7 +11,7 @@ import { CartCounter } from 'shared/ui/CartCounter';
 import { ProductCartCounter } from 'shared/ui/ProductCartCounter';
 import { LikeButton } from 'shared/ui/LikeButton';
 import { QualityUIIcon, TruckUIIcon } from 'shared/assets';
-import { ReviewList } from 'widgets/ReviewList/ui/ReviewList';
+import { ReviewList } from 'widgets/ReviewList';
 import { memo } from 'react';
 
 export const ProductPage = WithProtection(
