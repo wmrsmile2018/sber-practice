@@ -7,7 +7,6 @@ import { ProductPage } from 'pages/ProductPage';
 import { ProfilePage } from 'pages/ProfilePage';
 import { CartPage } from 'pages/CartPage';
 import { SignUpPage } from 'pages/SignUpPage';
-import { SignInPage } from 'pages/SignInPage';
 import { NotFoundPage } from 'pages/NotFoundPage';
 
 export enum AppRoutes {
@@ -60,10 +59,6 @@ export const router = createBrowserRouter([
       {
         path: RoutePath.signup,
         element: <SignUpPage />,
-      },
-      {
-        path: RoutePath.signin,
-        element: <SignInPage />,
       },
 
       // last route

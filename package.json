@@ -47,7 +47,7 @@
     "vite-tsconfig-paths": "6.1.1"
   },
   "scripts": {
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build ",
     "start": "vite",
     "stylelint": "stylelint \"src/**/*.css\"",
     "stylelint:fix": "stylelint \"src/**/*.css\" --fix",

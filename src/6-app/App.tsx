@@ -12,7 +12,9 @@ export const App = () => {
     <>
       <Header />
       <Sort />
-      <Outlet />
+      <div style={{ display: 'flex', flex: 1 }}>
+        <Outlet />
+      </div>
       <ToastContainer
         position='top-right'
         autoClose={5000}

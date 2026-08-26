@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -14,11 +14,15 @@ import { getMessageFromError } from 'shared/utils';
 import { signInFormSchema } from './validator';
 import s from './SignInForm.module.css';
 
-export const SignInForm: FC = () => {
+type SignInFormProps = {
+  onClick: VoidFunction;
+};
+
+export const SignInForm: FC<SignInFormProps> = ({ onClick }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [signInRequestFn] = useSignInMutation();
+  const [signInRequestFn, { isSuccess }] = useSignInMutation();
   const {
     control,
     handleSubmit,
@@ -55,8 +59,13 @@ export const SignInForm: FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      onClick();
+    }
+  }, [onClick, isSuccess]);
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' className={s.container}>
       <Box
         sx={{
           marginTop: 8,
@@ -125,6 +134,7 @@ export const SignInForm: FC = () => {
               level='primary'
               onClick={() => {
                 navigate('/signup');
+                onClick();
               }}
             >
               SIGN UP
