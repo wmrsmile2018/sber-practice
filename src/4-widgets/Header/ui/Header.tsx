@@ -5,11 +5,11 @@ import { useAppSelector } from 'shared/store/utils';
 import { cartSelectors, userSelectors } from 'shared/store/slices';
 import { isLiked } from 'shared/utils';
 import { Logo } from 'shared/ui/Logo';
-import { Search } from 'shared/ui/Search/ui/Search';
+import { Search } from 'shared/ui/Search';
 import { Link } from 'react-router-dom';
 import { memo, useState } from 'react';
 import { ButtonUI, ModalUI } from 'shared/ui';
-import { SignInForm } from 'entities/user/ui';
+import { SignInForm } from 'entities/user';
 
 export const Header = memo(() => {
   const { products } = useProducts();

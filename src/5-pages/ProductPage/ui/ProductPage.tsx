@@ -1,18 +1,18 @@
 import s from './ProductPage.module.css';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
-import { WithProtection } from 'shared/store/HOCs/WithProtection';
+import { WithProtection } from 'shared/store/HOCs';
 import { useAppSelector } from 'shared/store/utils';
-import { cartSelectors } from 'shared/store/slices/cart';
-import { useGetProductQuery } from 'shared/store/api/productsApi';
+import { cartSelectors } from 'shared/store/slices';
 import { ButtonBack } from 'shared/ui/ButtonBack';
 import { Rating } from 'shared/ui/Rating';
 import { CartCounter } from 'shared/ui/CartCounter';
 import { ProductCartCounter } from 'shared/ui/ProductCartCounter';
 import { LikeButton } from 'shared/ui/LikeButton';
 import { QualityUIIcon, TruckUIIcon } from 'shared/assets';
-import { ReviewList } from 'widgets/ReviewList/ui/ReviewList';
+import { ReviewList } from 'widgets/ReviewList';
 import { memo } from 'react';
+import { useGetProductQuery } from 'shared/store/api';
 
 export const ProductPage = WithProtection(
   memo(() => {
