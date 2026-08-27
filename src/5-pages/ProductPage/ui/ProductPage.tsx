@@ -6,7 +6,7 @@ import { useAppSelector } from 'shared/store/utils';
 import { cartSelectors } from 'shared/store/slices';
 import { ButtonBack } from 'shared/ui/ButtonBack';
 import { Rating } from 'shared/ui/Rating';
-import { ProductCartCounter , CartCounter, LikeButton } from 'entities/cart';
+import { ProductCartCounter, CartCounter, LikeButton } from 'entities/cart';
 import { QualityUIIcon, TruckUIIcon } from 'shared/assets';
 import { ReviewList } from 'widgets/ReviewList';
 import { memo } from 'react';
@@ -31,7 +31,7 @@ export const ProductPage = WithProtection(
     const isProductInCart = !!cartProducts.find((p) => p.id === id);
 
     return (
-      <>
+      <div className={classNames(s['container'])}>
         <ButtonBack />
         <h1 className={classNames(s['header-title'])}>{name}</h1>
         <p className='acticul'>
@@ -125,7 +125,7 @@ export const ProductPage = WithProtection(
           </div>
         </div>
         <ReviewList product={product} />
-      </>
+      </div>
     );
   }),
 );

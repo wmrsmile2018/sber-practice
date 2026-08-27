@@ -161,3 +161,98 @@
 [x] Возможность добавления в корзину товаров со страницы каталога. (2 балла)
 [x] Возможность добавления в корзину товара со страницы каталога больше одной штуки (кнопка «В корзину» меняется на счетчик добавляемого товара). (2 балла)
 [x] Возможность добавления в корзину со страницы товара по макету. (2 балла)
+
+---
+
+## Структура папок
+
+Проект построен по методологии **Feature-Sliced Design (FSD)** с 6 уровнями:
+
+```
+src/
+├── 1-shared/          # Общие примитивы: UI-компоненты, API, store, хуки, утилиты, типы
+│   ├── api/           # RTK Query endpoints, кастомные хуки API
+│   ├── assets/        # Иконки (SVGR), SVG-исходники
+│   ├── hooks/         # Общие кастомные хуки (useDebounce, usePagination)
+│   ├── store/         # Redux Toolkit: slices, middleware, HOC-защита
+│   ├── types/         # Глобальные TypeScript-типы
+│   └── ui/            # Презентационные примитивы (Button, Input, Modal, Logo...)
+│
+├── 2-entities/        # Бизнес-сущности: карточки, корзина, пользователь
+│   ├── cart/          # Модель (хуки useAddToCart, useLikeButton) + UI (Card, CartItem...)
+│   └── user/          # UI: SignInForm, SignUpForm
+│
+├── 3-features/        # Фичи: пользовательские взаимодействия
+│   ├── CartList/      # Отображение списка корзины
+│   ├── loadMore/      # IntersectionObserver — бесконечный скролл
+│   ├── search/        # Debounced-поиск с URL-параметрами
+│   └── sort/          # Сортировка товаров
+│
+├── 4-widgets/         # Композабельные блоки страницы
+│   ├── CardList/      # Сетка карточек товаров
+│   ├── Footer/        # Подвал
+│   ├── Header/        # Шапка: поиск, навигация, модалка входа
+│   └── ReviewList/    # Отзывы + форма отзыва
+│
+├── 5-pages/           # Полные страницы приложения
+│   ├── CartPage/
+│   ├── FavoritesPage/
+│   ├── HomePage/
+│   ├── NotFoundPage/
+│   ├── ProductPage/
+│   ├── ProfilePage/
+│   └── SignUpPage/
+│
+└── 6-app/             # Корень приложения: App, роутинг, стили, провайдеры
+```
+
+---
+
+## Что сделано
+
+### Архитектура
+- **Feature-Sliced Design**: 6 уровней (shared → entities → features → widgets → pages → app)
+- **shared/ui** — только презентационные компоненты, без store и API
+- **Устранены prop-chains**: видимость модального окна управляется через Redux (modalSlice), а не пробрасывается через Header → ModalUI → SignInForm
+
+### Оптимизация рендеров
+- **React.Profiler** в App.tsx — логирование рендеров >10ms в консоль
+- **Hotspot**: `CardList → Card` — карточка подписана на cart slice, при любом изменении корзины ререндерится весь список
+- **React.memo**: 13 компонентов (Header, CardList, Card, CartItem, CartPage, HomePage и др.)
+- **useMemo**: расчёт итоговых цен в CartAmount, поиск продукта в useCount, getElementById в ModalUI
+- **useCallback**: обработчики submit в SignInForm/SignUpForm, инкремент/декремент в CartCounter, toggleLike, addToCart
+
+### React.Portal + доступность
+- **ModalUI** на `createPortal` с контейнером `#modal-root`
+- **ESC** — закрытие модалки
+- **Overlay** — клик закрывает модалку
+- **Автофокус** — первый интерактивный элемент модалки при открытии
+- **Focus trap** — Tab/Shift+Tab зациклены внутри модалки
+- **Возврат фокуса** — при закрытии фокус возвращается на кнопку-триггер
+- **Блокировка скролла** body при открытой модалке
+
+### useRef
+- **ModalUI**: `contentRef` для focus trap, `triggerRef` для возврата фокуса
+- **SignInForm/SignUpForm**: `emailRef` + `useLayoutEffect` для автофокуса на email при монтировании
+- **HomePage**: `ref` для IntersectionObserver (бесконечный скролл)
+
+### Альтернативная сборка
+- **Vite** (основная): `@vitejs/plugin-react` + `vite-tsconfig-paths`
+- **esbuild** (альтернативная): `esbuild.config.mjs` — bundle + splitting + минификация
+
+### React 19
+- **useOptimistic** в LikeButton — оптимистичное обновление лайка без блокировки UI
+
+### Сравнивание сборок
+
+| Параметр          | Vite (esbuild-dev-server) | esbuild (production) |
+|-------------------|--------------------------|----------------------|
+| Время сборки      | ~0.5s (HMR)              | **0.13s**            |
+| Размер бандла     | ~280 KB (gzip)           | **728 KB** (uncompressed, 20 chunks) |
+| HMR               | ✅ мгновенный              | ❌ нет                |
+| CSS Modules       | ✅ postcss                 | ✅ плагин             |
+| Tree-shaking      | ✅ rollup                  | ⚠️ базовый           |
+| Code splitting    | ✅ rollup                  | ✅ splitting          |
+| Devtools          | ✅                       | ❌                    |
+
+**Вывод**: Vite предпочтительнее для разработки (HMR, devtools, rollup tree-shaking). esbuild — молниеносен для production-билда (0.13s против ~2-3s у Vite), но без глубокого tree-shaking и HMR. Для текущего проекта Vite — оптимальный выбор, esbuild可作为 альтернатива для CI/CD.

@@ -21,3 +21,9 @@
 .card__favorite_is-active svg path:first-child {
   fill: #f44336;
 }
+
+/* Оптимистичное состояние: полупрозрачность пока идёт запрос */
+.card__favorite_pending {
+  opacity: 0.6;
+  cursor: wait;
+}

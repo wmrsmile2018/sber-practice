@@ -13,13 +13,13 @@ type CardProps = {
   product: Product;
 };
 export const Card = memo(({ product }: CardProps) => {
-  const { discount, price, name, tags, id, images } = product;
+  const { discount, price, name, id, images } = product;
   const cartProducts = useAppSelector(cartSelectors.getCartProducts);
   const isProductInCart = cartProducts.some((p) => p.id === id);
   const { addProductToCart } = useAddToCart();
 
   return (
-    <article className={s['card']}>
+    <div className={s['card']}>
       <div
         className={classNames(
           s['card__sticky'],
@@ -27,12 +27,6 @@ export const Card = memo(({ product }: CardProps) => {
         )}
       >
         <span className={s['card__discount']}>{discount}</span>
-        {tags.length > 0 &&
-          tags.map((t) => (
-            <span key={t} className={classNames(s['tag'], s['tag_type_new'])}>
-              {t}
-            </span>
-          ))}
       </div>
       <div
         className={classNames(
@@ -69,6 +63,6 @@ export const Card = memo(({ product }: CardProps) => {
           В корзину
         </button>
       )}
-    </article>
+    </div>
   );
 });

@@ -1,0 +1,28 @@
+.button-count {
+  display: flex;
+  gap: 2px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 14px;
+  width: 120px;
+}
+
+.button-count__minus,
+.button-count__plus {
+  background: none;
+  border: none;
+  width: 30px;
+  min-width: 30px;
+  box-sizing: border-box;
+}
+
+.button-count__minus {
+  border-right: 1px solid black;
+}
+.button-count__num {
+  width: 100%;
+  border: none;
+}
+.button-count__plus {
+  border-left: 1px solid black;
+}
